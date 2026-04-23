@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-const apiKey = import.meta.env.CURRENCY_FREAKS_API_KEY;
+const apiKey = import.meta.env.VITE_CURRENCY_FREAKS_API_KEY;
 const apiCurrencyFreaks = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${apiKey}`;
 
 function App() {
-  const [currency, setCurrency] = useState([]);
-  const currencies = ["CAD", "EUR", "IDR", "JPY", "CHF", "GBP"]
+  const [currency, setCurrency] = useState("")
+  const currencies = ["CAD", "IDR", "JPY", "CHF", "EUR", "GBP"]
 
-  const currenciesMap = currencies.map((curr)=>{
-    const parseCurr = parseFloat(currency.rates?.[curr])
-
-    const numNaN = Number.isNaN(parseCurr)
-
-    function toLS(value) {
-      return value.toLocaleString("en-US", {
+  const currrencyTable = currencies.map((curr)=>{
+    const parseRates = parseFloat(currency.rates?.[curr])
+    const numNaN = Number.isNaN(parseRates)
+    const toLS = (value) => {
+      return value.toLocaleString("en-US",{
         style: "currency",
         currency: `${curr}`,
         maximumFractionDigits: 6
@@ -20,38 +18,36 @@ function App() {
     }
 
     return(
-        <tr>
-          <td>{curr}</td>
-          <td>{numNaN ? "Loading" : toLS(parseCurr * 0.95)}</td>
-          <td>{numNaN ? "Loading" : toLS(parseCurr)}</td>
-          <td>{numNaN ? "Loading" : toLS(parseCurr * 1.05)}</td>
-        </tr>
+          <tr>
+            <td>{curr}</td>
+            <td>{numNaN ? "Loading" : toLS(parseRates * 0.95)}</td>
+            <td>{numNaN ? "Loading" : toLS(parseRates)}</td>
+            <td>{numNaN ? "Loading" : toLS(parseRates * 1.05)}</td>
+          </tr>
     )
   })
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(
-        `${apiCurrencyFreaks}`,
-      );
-      const data = await response.json();
-      setCurrency(data);
+  useEffect(()=>{
+    const fetchData = async () =>{
+      const response = await fetch(apiCurrencyFreaks)
+      const data = await response.json()
+      setCurrency(data)
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <>
       <h1>Currency Table</h1>
       <table>
         <tbody>
-        <tr>
-          <td>Currency</td>
-          <td>We Buy</td>
-          <td>Exchange Rate</td>
-          <td>We Sell</td>
-        </tr>
-        {currenciesMap}
+          <tr>
+            <td>Currency</td>
+            <td>We Buy</td>
+            <td>Exchange Rate</td>
+            <td>We Sell</td>
+          </tr>
+          {currrencyTable}
         </tbody>
       </table>
       <p>Rates are based from 1 USD</p>
@@ -62,6 +58,16 @@ function App() {
 export default App;
 
 // https://www.kode.id/courses/take/copy-of-private-gunawan-react-and-react-native-basics/texts/73944058-assignment-2
+
+
+
+
+
+
+
+
+
+
 
 
 
