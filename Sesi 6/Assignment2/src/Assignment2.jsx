@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-const apiCurrencyFreaks =
-`https://api.currencyfreaks.com/v2.0/rates/latest?apikey=a5f21903e37d4107b7eb2ac4f1b8f40a`
+const apiKey = import.meta.env.CURRENCY_FREAKS_API_KEY;
+const apiCurrencyFreaks = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${apiKey}`;
 
 function App() {
   const [currency, setCurrency] = useState([]);
@@ -77,8 +77,8 @@ export default App;
 
 
 // import { useEffect, useState } from "react";
-// const apiCurrencyFreaks =
-// `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=a5f21903e37d4107b7eb2ac4f1b8f40a`
+// const apiKey = import.meta.env.CURRENCY_FREAKS_API_KEY;
+// const apiCurrencyFreaks = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${apiKey}`;
 
 // function App() {
 //   const [currency, setCurrency] = useState([]);
@@ -144,8 +144,8 @@ export default App;
 // STARTING CODE
 
 // import { useEffect, useState } from "react";
-// const apiCurrencyFreaks =
-// `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=a5f21903e37d4107b7eb2ac4f1b8f40a`
+// const apiKey = import.meta.env.CURRENCY_FREAKS_API_KEY;
+// const apiCurrencyFreaks = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${apiKey}`;
 
 // function App() {
 
