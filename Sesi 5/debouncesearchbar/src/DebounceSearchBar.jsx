@@ -1,4 +1,5 @@
-// import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+const jsonplaceholder = `https://jsonplaceholder.typicode.com/users`
 
 const DebounceSearchBar = () => {
 
@@ -12,7 +13,6 @@ const DebounceSearchBar = () => {
     </main>
   );
 };
-
 export default DebounceSearchBar;
 
 // Build a search bar that:
@@ -45,9 +45,27 @@ export default DebounceSearchBar;
 // 8. Fetch data: Render the result simply.
 // Clue: simple is better than pretty at first.
 
+// PSEUDOCODE:
+// component DebounceSearchBar
+//   create state for search text
+//   create state for fetched users
 
+//   useEffect runs when search text changes
+//     start a timer
+//       when timer finishes
+//         fetch from API using search text
+//         convert response to data
+//         store data in users state
 
+//     cleanup
+//       cancel previous timer
 
+//   return UI
+//     title
+//     controlled input
+//       value comes from search state
+//       onChange updates search state
+//     results area
 
 
 
@@ -62,23 +80,27 @@ export default DebounceSearchBar;
 
 
 
-// import { useEffect, useState } from "react";
+// import { useState, useEffect } from "react";
+// const jsonplaceholder = `https://jsonplaceholder.typicode.com/users`
 
 // const DebounceSearchBar = () => {
-//   const [query, setQuery] = useState("");
-//   const [users, setUsers] = useState([]);
+//   const [query, setQuery] = useState("")
+//   const [users, setUsers] = useState([])
 
-//   useEffect(() => {
+//   useEffect(()=>{
 //     const timeoutId = setTimeout(async () => {
-//       const response = await fetch(
-//         `https://jsonplaceholder.typicode.com/users?q=${query}`,
-//       );
-//       const data = await response.json();
-//       setUsers(data);
+//       const searchText = query.trim()
+//       const url = searchText ?
+//       `${jsonplaceholder}?name_like=${encodeURIComponent(searchText)}`
+//         : `${jsonplaceholder}`
+
+//       const response = await fetch(url)
+//       const data = await response.json()
+//       setUsers(data)
 //     }, 500);
 
-//     return () => clearTimeout(timeoutId);
-//   }, [query]);
+//     return () => clearTimeout(timeoutId)
+//   }, [query])
 
 //   return (
 //     <main className="container">
@@ -86,21 +108,21 @@ export default DebounceSearchBar;
 //       <input
 //         type="text"
 //         value={query}
-//         placeholder="Search user"
-//         onChange={(event) => setQuery(event.target.value)}
+//         placeholder="search name"
+//         onChange={(e) => setQuery(e.target.value)}
 //       />
 //       <pre>{JSON.stringify(users, null, 2)}</pre>
 //     </main>
 //   );
 // };
-
 // export default DebounceSearchBar;
 
 
 
 // STARTING CODE
 
-// import { useEffect, useState } from "react";
+// import { useState, useEffect } from "react";
+// const jsonplaceholder = `https://jsonplaceholder.typicode.com/users`
 
 // const DebounceSearchBar = () => {
 
@@ -114,5 +136,4 @@ export default DebounceSearchBar;
 //     </main>
 //   );
 // };
-
 // export default DebounceSearchBar;
