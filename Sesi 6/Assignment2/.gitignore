@@ -23,7 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
+# Environment variables and local API keys
 .env
 .env.*
+.env.local
+.env.development.local
+.env.production.local
 !.env.example
