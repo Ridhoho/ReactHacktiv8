@@ -66,15 +66,7 @@ console.log(summarizeOrders(orders));
 
 
 
-
-
-
-
-
-
 // ANSWER IS HERE
-
-
 
 // function summarizeOrder(orders) {
 //   const grouped = orders.reduce((total, current) => {

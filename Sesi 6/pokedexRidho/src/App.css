@@ -1,0 +1,377 @@
+.pokedex-app-shell {
+  display: flow-root;
+  background: linear-gradient(180deg, #ef1d24 0%, #df161d 55%, #c90f17 100%);
+}
+
+.pokedex-title {
+  margin: 1.5rem 0;
+  text-align: center;
+  transition: color 1s ease;
+  -webkit-text-stroke: 1px #000000c0;
+  font-weight: bolder;
+}
+
+.pokedex-search-input {
+  max-width: 400px;
+  margin: 0 auto 1rem;
+}
+
+.pokedex-button {
+  font-weight: 700;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.pokedex-button-prev {
+  background-color: #fff7d6 !important;
+  color: #3a2a14 !important;
+  border: 2px solid #3a2a14 !important;
+}
+
+.pokedex-button-next {
+  background-color: #ffe45c !important;
+  color: #2b2200 !important;
+  border: 2px solid #2b2200 !important;
+}
+
+.pokedex-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  filter: brightness(1.03);
+}
+
+.pokedex-button:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.35);
+}
+
+.pokedex-button-prev:hover:not(:disabled) {
+  background-color: #fff0b8 !important;
+  border-color: #24190b !important;
+  color: #24190b !important;
+}
+
+.pokedex-button-next:hover:not(:disabled) {
+  background-color: #ffd92a !important;
+  border-color: #1f1700 !important;
+  color: #1f1700 !important;
+}
+
+.pokemon-card {
+  margin: 1rem;
+  border: 2px solid #000000 !important;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.pokemon-card-dual {
+  background: linear-gradient(135deg, var(--type-primary) 50%, var(--type-secondary) 50%);
+}
+
+.pokemon-card-number {
+  text-align: center;
+}
+
+.pokemon-card-title {
+  text-align: center;
+  -webkit-text-stroke: 0.5px #ffffffc0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.pokemon-types-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemon-type-badge {
+  padding: 2px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
+}
+
+.pokemon-ability-card {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.pokemon-ability-card-first {
+  border-top: 1px solid #000000;
+}
+
+.pokemon-ability-name {
+  text-transform: capitalize;
+  display: block;
+  text-align: center;
+}
+
+.pokemon-stats-table {
+  border-collapse: collapse;
+}
+
+.type-normal,
+.card-primary-normal {
+  background-color: #A8A878;
+}
+
+.card-primary-normal {
+  --type-primary: #A8A878;
+}
+
+.type-fire,
+.card-primary-fire {
+  background-color: #F08030;
+}
+
+.card-primary-fire {
+  --type-primary: #F08030;
+}
+
+.type-water,
+.card-primary-water {
+  background-color: #6890F0;
+}
+
+.card-primary-water {
+  --type-primary: #6890F0;
+}
+
+.type-electric,
+.card-primary-electric {
+  background-color: #F8D030;
+}
+
+.card-primary-electric {
+  --type-primary: #F8D030;
+}
+
+.type-grass,
+.card-primary-grass {
+  background-color: #78C850;
+}
+
+.card-primary-grass {
+  --type-primary: #78C850;
+}
+
+.type-ice,
+.card-primary-ice {
+  background-color: #98D8D8;
+}
+
+.card-primary-ice {
+  --type-primary: #98D8D8;
+}
+
+.type-fighting,
+.card-primary-fighting {
+  background-color: #C03028;
+}
+
+.card-primary-fighting {
+  --type-primary: #C03028;
+}
+
+.type-poison,
+.card-primary-poison {
+  background-color: #A040A0;
+}
+
+.card-primary-poison {
+  --type-primary: #A040A0;
+}
+
+.type-ground,
+.card-primary-ground {
+  background-color: #E0C068;
+}
+
+.card-primary-ground {
+  --type-primary: #E0C068;
+}
+
+.type-flying,
+.card-primary-flying {
+  background-color: #A890F0;
+}
+
+.card-primary-flying {
+  --type-primary: #A890F0;
+}
+
+.type-psychic,
+.card-primary-psychic {
+  background-color: #F85888;
+}
+
+.card-primary-psychic {
+  --type-primary: #F85888;
+}
+
+.type-bug,
+.card-primary-bug {
+  background-color: #A8B820;
+}
+
+.card-primary-bug {
+  --type-primary: #A8B820;
+}
+
+.type-rock,
+.card-primary-rock {
+  background-color: #B8A038;
+}
+
+.card-primary-rock {
+  --type-primary: #B8A038;
+}
+
+.type-ghost,
+.card-primary-ghost {
+  background-color: #705898;
+}
+
+.card-primary-ghost {
+  --type-primary: #705898;
+}
+
+.type-dragon,
+.card-primary-dragon {
+  background-color: #7038F8;
+}
+
+.card-primary-dragon {
+  --type-primary: #7038F8;
+}
+
+.type-dark,
+.card-primary-dark {
+  background-color: #705848;
+}
+
+.card-primary-dark {
+  --type-primary: #705848;
+}
+
+.type-steel,
+.card-primary-steel {
+  background-color: #B8B8D0;
+}
+
+.card-primary-steel {
+  --type-primary: #B8B8D0;
+}
+
+.type-fairy,
+.card-primary-fairy {
+  background-color: #EE99AC;
+}
+
+.card-primary-fairy {
+  --type-primary: #EE99AC;
+}
+
+.card-secondary-normal {
+  --type-secondary: #A8A878;
+}
+
+.card-secondary-fire {
+  --type-secondary: #F08030;
+}
+
+.card-secondary-water {
+  --type-secondary: #6890F0;
+}
+
+.card-secondary-electric {
+  --type-secondary: #F8D030;
+}
+
+.card-secondary-grass {
+  --type-secondary: #78C850;
+}
+
+.card-secondary-ice {
+  --type-secondary: #98D8D8;
+}
+
+.card-secondary-fighting {
+  --type-secondary: #C03028;
+}
+
+.card-secondary-poison {
+  --type-secondary: #A040A0;
+}
+
+.card-secondary-ground {
+  --type-secondary: #E0C068;
+}
+
+.card-secondary-flying {
+  --type-secondary: #A890F0;
+}
+
+.card-secondary-psychic {
+  --type-secondary: #F85888;
+}
+
+.card-secondary-bug {
+  --type-secondary: #A8B820;
+}
+
+.card-secondary-rock {
+  --type-secondary: #B8A038;
+}
+
+.card-secondary-ghost {
+  --type-secondary: #705898;
+}
+
+.card-secondary-dragon {
+  --type-secondary: #7038F8;
+}
+
+.card-secondary-dark {
+  --type-secondary: #705848;
+}
+
+.card-secondary-steel {
+  --type-secondary: #B8B8D0;
+}
+
+.card-secondary-fairy {
+  --type-secondary: #EE99AC;
+}
+
+.stat-hp {
+  background-color: #4FC04D !important;
+}
+
+.stat-attack {
+  background-color: #F7D02C !important;
+}
+
+.stat-defense {
+  background-color: #F08030 !important;
+}
+
+.stat-special-attack {
+  background-color: #56C0F0 !important;
+}
+
+.stat-special-defense {
+  background-color: #9B79DA !important;
+}
+
+.stat-speed {
+  background-color: #F85888 !important;
+}
