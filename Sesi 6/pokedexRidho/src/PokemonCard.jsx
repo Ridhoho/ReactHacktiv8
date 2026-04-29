@@ -7,7 +7,7 @@ import PokemonStatsTable from './components/PokemonStatsTable';
 import {
   PRIMARY_TYPE_CLASSNAMES,
   SECONDARY_TYPE_CLASSNAMES,
-} from './components/pokemonTheme';
+} from './utils/pokemonTheme';
 import { getEnglishAbilityShortEffect } from './utils/pokemonApi';
 
 export default function PokemonCard({ pokemon, number }) {

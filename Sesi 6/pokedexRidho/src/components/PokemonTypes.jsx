@@ -1,4 +1,4 @@
-import { TYPE_CLASSNAMES } from './pokemonTheme';
+import { TYPE_CLASSNAMES } from '../utils/pokemonTheme';
 
 export default function PokemonTypes({ types }) {
   return (

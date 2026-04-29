@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import { STAT_CLASSNAMES, STAT_ROWS } from './pokemonTheme';
+import { STAT_CLASSNAMES, STAT_ROWS } from '../utils/pokemonTheme';
 
 export default function PokemonStatsTable({ stats, findStat }) {
   if (stats.length === 0) {
