@@ -1,6 +1,6 @@
-import { TYPE_CLASSNAMES } from '../utils/pokemonTheme';
+import { TYPE_CLASSNAMES } from '../utils/theme';
 
-export default function PokemonTypes({ types }) {
+export default function Types({ types }) {
   return (
     <>
       {types.length > 0

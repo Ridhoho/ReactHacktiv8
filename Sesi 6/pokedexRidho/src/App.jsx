@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import PokemonCard from "./PokemonCard";
-import PokedexHeader from "./components/PokedexHeader";
-import PaginationControls from "./components/PaginationControls";
+import PokeCard from "./PokeCard";
+import Header from "./components/Header";
+import Pagination from "./components/Pagination";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { POKEAPI_ALL_URL, POKEAPI_PAGE_URL, fetchPokemonDetail } from "./utils/pokemonApi";
+import { POKEAPI_ALL_URL, POKEAPI_PAGE_URL, fetchPokemonDetail } from "./utils/pokeApi";
 import { TYPE_COLORS } from "./utils/typeColors";
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
   const [next, setNext] = useState(null);
   const [offset, setOffset] = useState(0);
   const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [titleColor, setTitleColor] = useState(TYPE_COLORS[0]);
 
   const getAllPokemons = async () => {
@@ -59,10 +60,20 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+    }, 300);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchInput]);
+
+  useEffect(() => {
     let cancelled = false;
 
     const runGlobalSearch = async () => {
-      const query = searchInput.trim().toLowerCase();
+      const query = debouncedSearch.trim().toLowerCase();
       if (!query) {
         setSearchResults([]);
         return;
@@ -87,7 +98,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [searchInput, allPokemons]);
+  }, [debouncedSearch, allPokemons]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -100,7 +111,7 @@ function App() {
     };
   }, []);
 
-  const filteredPokemons = searchInput
+  const filteredPokemons = debouncedSearch
     ? searchResults.map((p) => ({ p, number: p.number }))
     : pokemons.map((p, i) => ({ p, number: offset + i + 1 }));
 
@@ -112,7 +123,7 @@ function App() {
         minHeight: "100vh",
       }}
     >
-      <PokedexHeader
+      <Header
         titleColor={titleColor}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -120,11 +131,11 @@ function App() {
       <Row xs={1} sm={2} md={3} lg={4} className="g-0">
         {filteredPokemons.map(({ p, number }) => (
           <Col key={p.name}>
-            <PokemonCard pokemon={p} number={number} />
+            <PokeCard pokemon={p} number={number} />
           </Col>
         ))}
       </Row>
-      <PaginationControls
+      <Pagination
         previous={previous}
         next={next}
         handlePrevious={handlePrevious}

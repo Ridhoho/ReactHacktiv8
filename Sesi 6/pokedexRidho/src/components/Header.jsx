@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 
-export default function PokedexHeader({ titleColor, searchInput, setSearchInput }) {
+export default function Header({ titleColor, searchInput, setSearchInput }) {
   return (
     <>
       <h1 className="pokedex-title" style={{ color: titleColor }}>

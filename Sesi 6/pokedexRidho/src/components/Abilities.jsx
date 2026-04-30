@@ -1,4 +1,4 @@
-export default function PokemonAbilities({ isAbilityLoading, abilityEffects }) {
+export default function Abilities({ isAbilityLoading, abilityEffects }) {
   if (isAbilityLoading) {
     return <div>Loading abilities...</div>;
   }

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import PokemonCarousel from './components/PokemonCarousel';
-import PokemonTypes from './components/PokemonTypes';
-import PokemonAbilities from './components/PokemonAbilities';
-import PokemonStatsTable from './components/PokemonStatsTable';
+import Carousel from './components/Carousel';
+import Types from './components/Types';
+import Abilities from './components/Abilities';
+import StatsTable from './components/StatsTable';
 import {
   PRIMARY_TYPE_CLASSNAMES,
   SECONDARY_TYPE_CLASSNAMES,
-} from './utils/pokemonTheme';
-import { getEnglishAbilityShortEffect } from './utils/pokemonApi';
+} from './utils/theme';
+import { getEnglishAbilityShortEffect } from './utils/pokeApi';
 
-export default function PokemonCard({ pokemon, number }) {
+export default function PokeCard({ pokemon, number }) {
   const detail = pokemon?.detail;
   const types = detail?.types ?? [];
   const stats = detail?.stats ?? [];
@@ -78,7 +78,7 @@ export default function PokemonCard({ pokemon, number }) {
   return (
     <Card className={cardClassName}>
       <h3 className="pokemon-card-number">No. {paddedNumber}</h3>
-      <PokemonCarousel
+      <Carousel
         imageFront={imageFront}
         imageBack={imageBack}
         pokemonName={pokemonName}
@@ -89,17 +89,17 @@ export default function PokemonCard({ pokemon, number }) {
           {pokemonName?.toUpperCase()}
         </Card.Title>
         <Card.Text as="div" className="pokemon-types-row">
-          <PokemonTypes types={types} />
+          <Types types={types} />
         </Card.Text>
         <Card.Text as="div" className="mb-0">
-          <PokemonAbilities
+          <Abilities
             isAbilityLoading={isAbilityLoading}
             abilityEffects={abilityEffects}
           />
         </Card.Text>
       </Card.Body>
 
-      <PokemonStatsTable stats={stats} findStat={findStat} />
+      <StatsTable stats={stats} findStat={findStat} />
     </Card>
   );
 }

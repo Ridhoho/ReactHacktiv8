@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 
-export default function PaginationControls({ previous, next, handlePrevious, handleNext }) {
+export default function Pagination({ previous, next, handlePrevious, handleNext }) {
   return (
     <div className="d-flex justify-content-center gap-3 my-4">
       <Button
