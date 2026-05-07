@@ -12,7 +12,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
-    const sections = document.querySelectorAll(".content > section");
+    const sections = document.querySelectorAll(".content section[id]");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,50 +31,21 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  const componentsArray = [About, Experience, Education, Skills, Interests, Awards]
-  const componentsMap = componentsArray.map((Component) => {
-    return( 
-      <>
-    <Component key={Component.name} />
-    <hr />
-    </>
-  )
-  });
+  const sections = [About, Experience, Education, Skills, Interests, Awards]
 
   return (
     <div className="container">
       <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
       <main className="content">
-        {componentsMap}
+        {sections.map((SectionComponent, index) => (
+          <div key={SectionComponent.name} className="content-section-wrapper">
+            <SectionComponent />
+            {index < sections.length - 1 && <hr />}
+          </div>
+        ))}
       </main>
     </div>
   )
 }
 
 export default App
-
-
-
-
-
-// import Navbar from "./components/Navbar"
-// import Home from "./pages/Home"
-// import About from "./pages/About"
-// import AboutCompany from "./pages/AboutCompany";
-// import AboutMe from "./pages/AboutMe";
-// import Members from './pages/Members'
-// import Member from './pages/Member'
-
-    // <div className="container">
-    //   <Navbar />
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/about" element={<About />}>
-    //       <Route path="about-company" element={<AboutCompany />}></Route>
-    //       <Route path="about-me" element={<AboutMe />}></Route>
-    //     </Route>
-    //     <Route path="/members" element={<Members />}>
-    //       <Route path=":memberName" element={<Member />} />
-    //     </Route>
-    //   </Routes>
-    // </div>
