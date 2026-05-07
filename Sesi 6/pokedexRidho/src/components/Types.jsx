@@ -4,15 +4,15 @@ export default function Types({ types }) {
   return (
     <>
       {types.length > 0
-        ? types.map((typeItem) => (
+        ? types.map((item) => (
             <span
-              key={typeItem.type.name}
-              className={`pokemon-type-badge ${TYPE_CLASSNAMES[typeItem.type.name] || ''}`}
+              key={item.type.name}
+              className={`pokemon-type-badge ${TYPE_CLASSNAMES[item.type.name] || ''}`}
             >
-              {typeItem.type.name}
+              {item.type.name}
             </span>
           ))
-        : <span>-</span>}
+        : <span> </span>}
     </>
   );
 }

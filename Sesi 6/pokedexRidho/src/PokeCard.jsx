@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import Carousel from './components/Carousel';
-import Types from './components/Types';
-import Abilities from './components/Abilities';
-import StatsTable from './components/StatsTable';
+import { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Carousel from "./components/Carousel";
+import Types from "./components/Types";
+import Abilities from "./components/Abilities";
+import StatsTable from "./components/StatsTable";
 import {
   PRIMARY_TYPE_CLASSNAMES,
   SECONDARY_TYPE_CLASSNAMES,
-} from './utils/theme';
-import { getEnglishAbilityShortEffect } from './utils/pokeApi';
+} from "./utils/theme";
+import { getEnglishAbilityShortEffect } from "./utils/pokeApi";
 
 export default function PokeCard({ pokemon, number }) {
   const detail = pokemon?.detail;
@@ -21,43 +21,48 @@ export default function PokeCard({ pokemon, number }) {
   const imageBack = pokemon?.detail?.sprites?.back_default;
   const pokemonName = pokemon?.name;
   const cardClassName = [
-    'pokemon-card',
-    types[0] ? PRIMARY_TYPE_CLASSNAMES[types[0].type.name] : '',
-    types[1] ? `pokemon-card-dual ${SECONDARY_TYPE_CLASSNAMES[types[1].type.name]}` : '',
-  ].filter(Boolean).join(' ');
+    "pokemon-card",
+    types[0] ? PRIMARY_TYPE_CLASSNAMES[types[0].type.name] : "",
+    types[1]
+      ? `pokemon-card-dual ${SECONDARY_TYPE_CLASSNAMES[types[1].type.name]}`
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   useEffect(() => {
     let cancelled = false;
 
+    // CLUES.md: 1. Start by getting the abilities array from `detail`.
     const getAbilityEffects = async () => {
       const abilityList = detail?.abilities ?? [];
-
       if (abilityList.length === 0) {
         setAbilityEffects([]);
         return;
       }
-
       setIsAbilityLoading(true);
+
+      // CLUES.md: 2. Create a name and effect for each abilities.
       try {
-        const details = await Promise.all(
+        const abilityEffectResults = await Promise.all(
           abilityList.map(async (a) => {
             return {
               name: a.ability.name,
               short_effect: await getEnglishAbilityShortEffect(a.ability.url),
             };
-          })
+          }),
         );
-
         if (!cancelled) {
-          setAbilityEffects(details);
+          setAbilityEffects(abilityEffectResults);
         }
       } catch {
+        // CLUES.md: 3. Error catching and final loading cleanup.
         if (!cancelled) {
           setAbilityEffects(
             abilityList.map((a) => ({
               name: a.ability.name,
-              short_effect: '-',
-            }))
+              short_effect: "-",
+            })),
           );
         }
       } finally {
@@ -67,13 +72,15 @@ export default function PokeCard({ pokemon, number }) {
       }
     };
 
+    // CLUES.md: 4. Call function and return cancelled to true.
     getAbilityEffects();
     return () => {
       cancelled = true;
     };
   }, [detail]);
 
-  const findStat = (name) => stats.find((s) => s.stat.name === name)?.base_stat ?? '-';
+  const findStat = (name) =>
+    stats.find((s) => s.stat.name === name)?.base_stat ?? "-";
 
   return (
     <Card className={cardClassName}>

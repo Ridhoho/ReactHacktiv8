@@ -11,7 +11,7 @@ export default function Abilities({ isAbilityLoading, abilityEffects }) {
     <div>
       {abilityEffects.map((ability, index) => (
         <div
-          key={`${ability.name}-name`}
+          key={`${ability.name}`}
           className={`pokemon-ability-card ${index === 0 ? 'pokemon-ability-card-first' : ''}`}
         >
           <strong className="pokemon-ability-name">{ability.name}</strong>

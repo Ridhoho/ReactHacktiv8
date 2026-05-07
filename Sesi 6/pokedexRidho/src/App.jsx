@@ -20,6 +20,15 @@ function App() {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [titleColor, setTitleColor] = useState(TYPE_COLORS[0]);
 
+  const getPokemons = async (url) => {
+    const response = await fetch(url || POKEAPI_PAGE_URL);
+    const data = await response.json();
+    const details = await Promise.all(data.results.map(fetchPokemonDetail));
+    setPokemons(details);
+    setPrevious(data.previous);
+    setNext(data.next);
+  };
+
   const getAllPokemons = async () => {
     try {
       const response = await fetch(POKEAPI_ALL_URL);
@@ -28,17 +37,6 @@ function App() {
     } catch (error) {
       console.error("Error fetching all pokemon:", error);
     }
-  };
-
-  const getPokemons = async (url) => {
-    const response = await fetch(url || POKEAPI_PAGE_URL);
-    const data = await response.json();
-
-    const details = await Promise.all(data.results.map(fetchPokemonDetail));
-
-    setPokemons(details);
-    setPrevious(data.previous);
-    setNext(data.next);
   };
 
   const handleNext = () => {
@@ -54,7 +52,7 @@ function App() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+// eslint-disable-next-line react-hooks/set-state-in-effect
     getPokemons();
     getAllPokemons();
   }, []);
@@ -87,10 +85,10 @@ function App() {
         })
         .slice(0, 40);
 
-      const detailed = await Promise.all(matched.map(fetchPokemonDetail));
+      const details = await Promise.all(matched.map(fetchPokemonDetail));
 
       if (!cancelled) {
-        setSearchResults(detailed);
+        setSearchResults(details);
       }
     };
 
