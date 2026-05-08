@@ -1,4 +1,5 @@
 export default function Abilities({ isAbilityLoading, abilityEffects }) {
+  
   if (isAbilityLoading) {
     return <div>Loading abilities...</div>;
   }

@@ -15,7 +15,9 @@ export default function StatsTable({ stats, findStat }) {
             <tr key={row[0].key}>
               {row.map((cell) => (
                 <td key={cell.key} className={STAT_CLASSNAMES[cell.key]}>
-                  <strong>{cell.label}: {findStat(cell.key)}</strong>
+                  <strong>
+                    {cell.label}: {findStat(cell.key)}
+                  </strong>
                 </td>
               ))}
             </tr>
