@@ -1,0 +1,76 @@
+export const STAT_ROWS = [
+  [],
+  [],
+  []
+];
+
+export const STAT_CLASSNAMES = {
+  hp: "stat-hp",
+  attack: "stat-attack",
+  defense: "stat-defense",
+  "special-attack": "stat-special-attack",
+  "special-defense": "stat-special-defense",
+  speed: "stat-speed",
+};
+
+export const TYPE_CLASSNAMES = {
+  normal: "type-normal",
+  fire: "type-fire",
+  water: "type-water",
+  electric: "type-electric",
+  grass: "type-grass",
+  ice: "type-ice",
+  fighting: "type-fighting",
+  poison: "type-poison",
+  ground: "type-ground",
+  flying: "type-flying",
+  psychic: "type-psychic",
+  bug: "type-bug",
+  rock: "type-rock",
+  ghost: "type-ghost",
+  dragon: "type-dragon",
+  dark: "type-dark",
+  steel: "type-steel",
+  fairy: "type-fairy",
+};
+
+export const PRIMARY_TYPE_CLASSNAMES = {
+  normal: "card-primary-normal",
+  fire: "card-primary-fire",
+  water: "card-primary-water",
+  electric: "card-primary-electric",
+  grass: "card-primary-grass",
+  ice: "card-primary-ice",
+  fighting: "card-primary-fighting",
+  poison: "card-primary-poison",
+  ground: "card-primary-ground",
+  flying: "card-primary-flying",
+  psychic: "card-primary-psychic",
+  bug: "card-primary-bug",
+  rock: "card-primary-rock",
+  ghost: "card-primary-ghost",
+  dragon: "card-primary-dragon",
+  dark: "card-primary-dark",
+  steel: "card-primary-steel",
+  fairy: "card-primary-fairy",
+};
+export const SECONDARY_TYPE_CLASSNAMES = {
+  normal: "card-secondary-normal",
+  fire: "card-secondary-fire",
+  water: "card-secondary-water",
+  electric: "card-secondary-electric",
+  grass: "card-secondary-grass",
+  ice: "card-secondary-ice",
+  fighting: "card-secondary-fighting",
+  poison: "card-secondary-poison",
+  ground: "card-secondary-ground",
+  flying: "card-secondary-flying",
+  psychic: "card-secondary-psychic",
+  bug: "card-secondary-bug",
+  rock: "card-secondary-rock",
+  ghost: "card-secondary-ghost",
+  dragon: "card-secondary-dragon",
+  dark: "card-secondary-dark",
+  steel: "card-secondary-steel",
+  fairy: "card-secondary-fairy",
+};

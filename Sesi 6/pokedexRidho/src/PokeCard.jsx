@@ -20,6 +20,7 @@ export default function PokeCard({ pokemon, number }) {
   const imageFront = pokemon?.detail?.sprites?.front_default;
   const imageBack = pokemon?.detail?.sprites?.back_default;
   const pokemonName = pokemon?.name;
+  
   const cardClassName = [
     "pokemon-card",
     types[0] ? PRIMARY_TYPE_CLASSNAMES[types[0].type.name] : "",
@@ -31,9 +32,8 @@ export default function PokeCard({ pokemon, number }) {
     .join(" ");
 
   useEffect(() => {
-    let cancelled = false;
-
     // CLUES.md: 1. Start by getting the abilities array from `detail`.
+    let cancelled = false;
     const getAbilityEffects = async () => {
       const abilityList = detail?.abilities ?? [];
       if (abilityList.length === 0) {
@@ -105,7 +105,6 @@ export default function PokeCard({ pokemon, number }) {
           />
         </Card.Text>
       </Card.Body>
-
       <StatsTable stats={stats} findStat={findStat} />
     </Card>
   );
