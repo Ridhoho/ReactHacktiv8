@@ -110,21 +110,21 @@ Use `imageFront` on the first `img` element and `imageBack` on the second `img` 
 { slot: 1, type: { name: 'fire', url: '...' } }
 ```
 
-Check the length of types to be above 0 using ternary operator.
+1. Check the length of types to be above 0 using ternary operator.
 
-If true, Map over types with `item` as the parameter.
+2. If true, Map over types with `item` as the parameter.
 
-Return a `span` element and add a `key` attribute.
+3. Return a `span` element and add a `key` attribute.
 
-Refer to `import { TYPE_CLASSNAMES } from '../utils/theme'` and `App.css` for className styling. Fill the blank spaces in `${     || ''}`.
+4. Refer to `import { TYPE_CLASSNAMES } from '../utils/theme'` and `App.css` for className styling. Fill the blank spaces in `${     || ''}`.
 
 ```js
 className={`pokemon-type-badge ${     || ''}`}
 ```
 
-Fill `span` element with the correct text referring to the item type name.
+5. Fill `span` with the correct text referring to the item type name.
 
-If false, empty `span` element.
+6. If false, empty `span` element.
 
 ---
 
@@ -198,7 +198,7 @@ This is the most complex component. Work on it after the helper components above
 
 ### Step 1 — Accept props and extract data
 
-Accept `{ stats, findStat }` props.
+Accept `{ pokemon, number }` props.
 
 ```jsx
   const detail = pokemon?.detail;          // full pokemon data
@@ -376,7 +376,7 @@ Empty dependency array run only once when component first renders.
 
 ### Effect 2 — debounce the search input
 
-This delays the actual search by 300ms after the user stops typing (debouncing). Without this, a fetch would fire on every single keystroke.
+This delays the actual search with a timer after the user stops typing (debouncing). Without this, fetch would fire on every single keystroke.
 
 - Use an effect that watches `searchInput`.
 - Inside the effect, start a timer.
