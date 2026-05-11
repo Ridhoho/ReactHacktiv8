@@ -2,14 +2,34 @@ import { useState, useEffect } from "react";
 const jsonplaceholder = `https://jsonplaceholder.typicode.com/users`
 
 const DebounceSearchBar = () => {
+  const [query, setQuery] = useState("")
+  const [users, setUsers] = useState([])
+
+  useEffect(()=>{
+    const timeoutId = setTimeout(async () => {
+      const searchText = query.trim()
+      const url = searchText ?
+      `${jsonplaceholder}?name_like=${encodeURIComponent(searchText)}`
+        : `${jsonplaceholder}`
+
+      const response = await fetch(url)
+      const data = await response.json()
+      setUsers(data)
+    }, 500);
+
+    return () => clearTimeout(timeoutId)
+  }, [query])
 
   return (
     <main className="container">
       <h1>Debounce Search Bar</h1>
       <input
-
+        type="text"
+        value={query}
+        placeholder="search name"
+        onChange={(e) => setQuery(e.target.value)}
       />
-      <pre></pre>
+      <pre>{JSON.stringify(users, null, 2)}</pre>
     </main>
   );
 };
@@ -51,74 +71,3 @@ export default DebounceSearchBar;
 // 6. Delay search inside effect: Do the fetch after the wait.
 // 7. Clean up the old delay: Store the response in state.
 // 8. Fetch data: Render the result simply.
-
-
-
-
-
-
-
-
-
-
-// EXAMPLE AND ANSWER IS BELOW
-
-
-
-// import { useState, useEffect } from "react";
-// const jsonplaceholder = `https://jsonplaceholder.typicode.com/users`
-
-// const DebounceSearchBar = () => {
-//   const [query, setQuery] = useState("")
-//   const [users, setUsers] = useState([])
-
-//   useEffect(()=>{
-//     const timeoutId = setTimeout(async () => {
-//       const searchText = query.trim()
-//       const url = searchText ?
-//       `${jsonplaceholder}?name_like=${encodeURIComponent(searchText)}`
-//         : `${jsonplaceholder}`
-
-//       const response = await fetch(url)
-//       const data = await response.json()
-//       setUsers(data)
-//     }, 500);
-
-//     return () => clearTimeout(timeoutId)
-//   }, [query])
-
-//   return (
-//     <main className="container">
-//       <h1>Debounce Search Bar</h1>
-//       <input
-//         type="text"
-//         value={query}
-//         placeholder="search name"
-//         onChange={(e) => setQuery(e.target.value)}
-//       />
-//       <pre>{JSON.stringify(users, null, 2)}</pre>
-//     </main>
-//   );
-// };
-// export default DebounceSearchBar;
-
-
-
-// STARTING CODE
-
-// import { useState, useEffect } from "react";
-// const jsonplaceholder = `https://jsonplaceholder.typicode.com/users`
-
-// const DebounceSearchBar = () => {
-
-//   return (
-//     <main className="container">
-//       <h1>Debounce Search Bar</h1>
-//       <input
-
-//       />
-//       <pre></pre>
-//     </main>
-//   );
-// };
-// export default DebounceSearchBar;
