@@ -1,5 +1,5 @@
-import { useParams } from "react-router";
 import { members } from "./data";
+import { useParams } from "react-router";
 
 export default function MembersDetail() {
   const { member } = useParams();

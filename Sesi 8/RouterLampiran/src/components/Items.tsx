@@ -1,5 +1,5 @@
-import { Outlet, useNavigate } from "react-router";
 import { items } from "./data";
+import { Outlet, useNavigate } from "react-router";
 
 export default function Items() {
   const navigate = useNavigate();

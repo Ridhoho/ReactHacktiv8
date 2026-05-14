@@ -7,7 +7,7 @@
 
 - In the file that renders `<App />`, wrap the app with the router component that lets React Router use the browser URL
 - In `App.tsx`:
-- Keep <Navbar> outside route-matching area so its visible on every page
+- Keep <Navbar> outside route-matching area so it is visible on every page
 - Create a route for <Home> and <About>
 - <About> is the parent route to <AboutCompany />  and <AboutMe />
 - Put Link and Outlet inside `About.tsx` where child pages should appear
@@ -19,86 +19,61 @@
 - Match the text: `Home | About Us | Members | Items |`.
 - The link destination must match a route path.
 
-## Step 3: Add Members Dynamic Routes
+## Step 3: Build Members Page
 
+- In `App.tsx`:
 - Create a route for <Members> and <MembersDetail>
-- <Members> is the parent route to <MembersDetail /> with path to "member"
+- <Members> is the parent route to <MembersDetail />
 
-- Use `Data.ts` for members. In `Members.tsx`:
+- In `Members.tsx`:
+- Import `members` from `data.ts`. 
 - Map over each member to turn it into a Link. Add index parameter to avoid showing the `|` separator after the last member.
 - Add an element at the end for the child route to appear.
 
-- In `MemberDetail.tsx`:
-- 
+- In `MembersDetail.tsx`:
+- Import `members` from `data.ts`.
+- Use the React Router Hook that reads dynamic route parameters
+- Find the same member name inside members array
+- If member does not exist, show a fallback message; otherwise, show member name and detail
 
-## Step 4: Add Items Dynamic Routes
+## Step 4: Build Items Page
 
-- Store item data in one shared data file.
-- Each item should have an id, name, and power.
-- The Items page should show a table.
-- Clicking `Show detail` should change the URL.
-- The detail page should read the item id from the URL and find the matching item.
+- In `App.tsx`:
+- Create a route for <Items> and <ItemsDetail>
+- <Items> is the parent route to <ItemsDetail />
 
-Target paths:
+- In `data.ts`:
+- Store item data. Each item should have an id, name, and power
+- Create Type Alias and Type Annotation for `items` array.
+- Remember! URL Params are read as String, string ID make comparison simpler, otherwise you can use String() conversion.
 
-- `/items/1`
-- `/items/2`
-- `/items/3`
+- In `Items.tsx`:
+- Import `items` from `data.ts`
+- Use the React Router Hook that returns a function to let you navigate in the browser
+- Map over each item to turn it into a table with <tr> and <td>
+- Clicking `Show detail` should change the URL by using React Router Hook
 
-Check yourself:
+- In `ItemsDetail.ts`:
+- Import `items` from `data.ts`
+- Use the React Router Hook that reads dynamic route parameters
+- Find the same item id inside items array
+- If item does not exist, show a fallback message; otherwise, show item name and power
 
-- Why are URL params usually strings?
-- Why is one shared data file better than copying the same array into two components?
+## Step 5: Protect Items Route, Build Login Page And Logout Buttons
 
-## Step 5: Protect The Items Route
+- In `App.tsx`:
+- Create state for the user's login status
+- Check login state, Use `/items` route's element to choose between showing <Items /> or redirecting to Login with React Router Redirect Component
+- Create a route for <Login> and pass down the state setter so Login page can update login status
+- Pass down the state and state setter to <Navbar /> so it can update login status
 
-- Put login state in the component that owns the routes.
-- If the user is not logged in and tries to visit Items, redirect to Login.
-- If the user is logged in, show the Items page.
+- In `Login.tsx`:
+- Type the props so this page can receive login state setter from `App.tsx`. Add a TypeScript props type that says this prop is a React state setter for a boolean value, then use that type in the component parameter.
+- Use the React Router Navigation Hook to move the user after login.
+- Create a login handler that updates the login state to true, then sends the user to the Items page. Connect the login handler to the Login button.
 
-Target behavior:
-
-- Clicking Items while logged out goes to `/login`.
-- Clicking Login goes to `/items`.
-
-Check yourself:
-
-- Which React Router component redirects during render?
-- Why should login state not live only inside the Login page?
-
-## Step 6: Login And Logout Buttons
-
-- The Login button should set login state to true and then navigate to Items.
-- The Logout button should only appear when logged in.
-- The Logout button should return to Home and set login state to false.
-- Use button elements for login/logout because they change state.
-
-Check yourself:
-
-- When do you use a navigation hook instead of a link?
-- Why can logout accidentally redirect to Login if you update the login state while standing on a protected route?
-
-## Step 7: Match The Simple GIF Styling
-
-- Keep the page plain: white background, black text, basic browser-style links.
-- Add left spacing to the navbar and page content.
-- Add a thin horizontal line below the navbar.
-- Use large headings for page titles.
-- Use simple table spacing for Items.
-
-Check yourself:
-
-- Which styling belongs globally?
-- Which styling belongs to repeated elements like `nav`, `main`, and `table`?
-
-## Final Self-Test
-
-Try these flows:
-
-1. Home loads at `/`.
-2. About links show nested content.
-3. Member links change the URL and show the selected member.
-4. Items redirects to Login when logged out.
-5. Login sends you to Items.
-6. Item buttons change the URL and show item power.
-7. Logout returns to Home and hides the Logout button.
+- In `Navbar.tsx`:
+- Type the props to receive login state and setter from `App.tsx`. Add a TypeScript props type that says this prop is a React state setter for a boolean value, then use that type in the component parameter.
+- Use the React Router Navigation Hook to move the user after logout.
+- Create a logout handler that updates the login state to false, then sends the user to the Home page.
+- Check if login state is true, then create a Logout button and connect it with the logout handler.

@@ -1,5 +1,5 @@
-import { useParams } from "react-router";
 import { items } from "./data";
+import { useParams } from "react-router";
 
 export default function ItemsDetail() {
   const { itemId } = useParams();

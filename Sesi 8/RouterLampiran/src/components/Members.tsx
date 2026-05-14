@@ -1,5 +1,5 @@
-import { Link, Outlet } from "react-router";
 import { members } from "./data";
+import { Link, Outlet } from "react-router";
 
 export default function Members() {
   return (
