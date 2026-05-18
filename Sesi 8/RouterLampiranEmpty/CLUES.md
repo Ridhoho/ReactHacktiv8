@@ -10,7 +10,7 @@
 - Keep <Navbar> outside route-matching area so it is visible on every page
 - Create a route for <Home> and <About>
 - <About> is the parent route to <AboutCompany />  and <AboutMe />
-- Put Link and Outlet inside `About.tsx` where child pages should appear
+- In `About.tsx`: Put Link and Outlet where child pages should appear
 
 ## Step 2: Build The Navbar
 
@@ -27,7 +27,7 @@
 
 - In `Members.tsx`:
 - Import `members` from `data.ts`. 
-- Map over each member to turn it into a Link. Add index parameter to avoid showing the `|` separator after the last member.
+- Map over each members to turn it into a Link. Add index parameter to avoid showing the `|` separator after the last member.
 - Add an element at the end for the child route to appear.
 
 - In `MembersDetail.tsx`:
