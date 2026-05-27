@@ -207,101 +207,134 @@ const getSeriesTotal = (cafeId: string, seriesName: string) => {
   return series?.data.reduce((total, value) => total + value, 0) ?? 0;
 };
 
-async function main() {
-  if (process.env.NODE_ENV === "production") {
-    throw new Error("Seed reset is blocked in production");
-  }
+const cafes = [
+  {
+    cafeId: "PIM2-JS",
+    name: "Pondok Indah Mall 2",
+    city: "Jakarta Selatan",
+    province: "DKI Jakarta",
+  },
+  {
+    cafeId: "SH-TGR",
+    name: "Soekarno Hatta - 2F",
+    city: "Tangerang",
+    province: "Banten",
+  },
+  {
+    cafeId: "BIP-BDG",
+    name: "Bandung Indah Plaza",
+    city: "Bandung",
+    province: "Jawa Barat",
+  },
+  {
+    cafeId: "PS-JS",
+    name: "Plaza Senayan",
+    city: "Jakarta Selatan",
+    province: "DKI Jakarta",
+  },
+  {
+    cafeId: "GI-JP",
+    name: "Grand Indonesia",
+    city: "Jakarta Pusat",
+    province: "DKI Jakarta",
+  },
+  {
+    cafeId: "PM-SMG",
+    name: "Paragon Mall",
+    city: "Semarang",
+    province: "Jawa Tengah",
+  },
+  {
+    cafeId: "TP-SBY",
+    name: "Tunjungan Plaza",
+    city: "Surabaya",
+    province: "Jawa Timur",
+  },
+  {
+    cafeId: "HM-YGY",
+    name: "Hartono Mall",
+    city: "Yogyakarta",
+    province: "DI Yogyakarta",
+  },
+  {
+    cafeId: "BP-BPN",
+    name: "Balikpapan Plaza",
+    city: "Balikpapan",
+    province: "Kalimantan Timur",
+  },
+  {
+    cafeId: "PM-MKS",
+    name: "Panakkukang Mall",
+    city: "Makassar",
+    province: "Sulawesi Selatan",
+  },
+  {
+    cafeId: "NH-BTM",
+    name: "Nagoya Hill",
+    city: "Batam",
+    province: "Kepulauan Riau",
+  },
+  {
+    cafeId: "PI-PLM",
+    name: "Palembang Icon",
+    city: "Palembang",
+    province: "Sumatera Selatan",
+  },
+];
 
+const cafesWithTotals = cafes.map((cafe) => ({
+  ...cafe,
+  sales: getSeriesTotal(cafe.cafeId, "Monthly Sales (Rp Juta)"),
+  expenses: getSeriesTotal(cafe.cafeId, "Monthly Expenses (Rp Juta)"),
+}));
+
+const seedWithReset = async () => {
   await prisma.$executeRawUnsafe(
     'TRUNCATE TABLE "CafeDetail", "Cafe" RESTART IDENTITY CASCADE',
   );
 
   await prisma.cafe.createMany({
-    data: [
-      {
-        cafeId: "PIM2-JS",
-        name: "Pondok Indah Mall 2",
-        city: "Jakarta Selatan",
-        province: "DKI Jakarta",
-      },
-      {
-        cafeId: "SH-TGR",
-        name: "Soekarno Hatta - 2F",
-        city: "Tangerang",
-        province: "Banten",
-      },
-      {
-        cafeId: "BIP-BDG",
-        name: "Bandung Indah Plaza",
-        city: "Bandung",
-        province: "Jawa Barat",
-      },
-      {
-        cafeId: "PS-JS",
-        name: "Plaza Senayan",
-        city: "Jakarta Selatan",
-        province: "DKI Jakarta",
-      },
-      {
-        cafeId: "GI-JP",
-        name: "Grand Indonesia",
-        city: "Jakarta Pusat",
-        province: "DKI Jakarta",
-      },
-      {
-        cafeId: "PM-SMG",
-        name: "Paragon Mall",
-        city: "Semarang",
-        province: "Jawa Tengah",
-      },
-      {
-        cafeId: "TP-SBY",
-        name: "Tunjungan Plaza",
-        city: "Surabaya",
-        province: "Jawa Timur",
-      },
-      {
-        cafeId: "HM-YGY",
-        name: "Hartono Mall",
-        city: "Yogyakarta",
-        province: "DI Yogyakarta",
-      },
-      {
-        cafeId: "BP-BPN",
-        name: "Balikpapan Plaza",
-        city: "Balikpapan",
-        province: "Kalimantan Timur",
-      },
-      {
-        cafeId: "PM-MKS",
-        name: "Panakkukang Mall",
-        city: "Makassar",
-        province: "Sulawesi Selatan",
-      },
-      {
-        cafeId: "NH-BTM",
-        name: "Nagoya Hill",
-        city: "Batam",
-        province: "Kepulauan Riau",
-      },
-      {
-        cafeId: "PI-PLM",
-        name: "Palembang Icon",
-        city: "Palembang",
-        province: "Sumatera Selatan",
-      },
-    ].map((cafe) => ({
-      ...cafe,
-      sales: getSeriesTotal(cafe.cafeId, "Monthly Sales (Rp Juta)"),
-      expenses: getSeriesTotal(cafe.cafeId, "Monthly Expenses (Rp Juta)"),
-    })),
+    data: cafesWithTotals,
   });
 
   await prisma.cafeDetail.createMany({
     data: cafeDetails,
   });
 
-  console.log("Seed data inserted successfully");
+  console.log("Development seed reset inserted successfully");
+};
+
+const seedWithUpsert = async () => {
+  for (const cafe of cafesWithTotals) {
+    await prisma.cafe.upsert({
+      where: {
+        cafeId: cafe.cafeId,
+      },
+      update: cafe,
+      create: cafe,
+    });
+  }
+
+  for (const detail of cafeDetails) {
+    await prisma.cafeDetail.upsert({
+      where: {
+        cafeId: detail.cafeId,
+      },
+      update: detail,
+      create: detail,
+    });
+  }
+
+  console.log("Production/demo seed upsert completed successfully");
+};
+
+async function main() {
+  if (process.env.NODE_ENV === "production") {
+    await seedWithUpsert();
+    return;
+  }
+
+  await seedWithReset();
 }
 
 main()
