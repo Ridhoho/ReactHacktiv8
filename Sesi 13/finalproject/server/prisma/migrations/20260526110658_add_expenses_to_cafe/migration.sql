@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Cafe" ADD COLUMN     "expenses" INTEGER NOT NULL DEFAULT 0;

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Cafe" ALTER COLUMN "sales" TYPE INTEGER;
+ALTER TABLE "Cafe" ALTER COLUMN "expenses" TYPE INTEGER;
