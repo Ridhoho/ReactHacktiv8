@@ -208,8 +208,13 @@ const getSeriesTotal = (cafeId: string, seriesName: string) => {
 };
 
 async function main() {
-  await prisma.cafeDetail.deleteMany();
-  await prisma.cafe.deleteMany();
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Seed reset is blocked in production");
+  }
+
+  await prisma.$executeRawUnsafe(
+    'TRUNCATE TABLE "CafeDetail", "Cafe" RESTART IDENTITY CASCADE',
+  );
 
   await prisma.cafe.createMany({
     data: [
